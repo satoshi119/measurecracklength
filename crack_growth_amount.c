@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 
+//使用するには専用有限要素解析ソフトで作成されたファイルが必要になります
 
 typedef  struct  __node_t_ {
   double  *x;
@@ -94,6 +95,9 @@ static  int  ReadFracture
   return  1;
 }
 
+//８点平均亀裂長さ
+//一応nDivisionsで8点以外もできる
+
 static  void  MeasureCrackLength
 (int stepID, MESH_t *mesh, double thickness, int nDivisions, FILE *fp)
 {
@@ -116,7 +120,7 @@ static  void  MeasureCrackLength
 
       if (element->fracture == 0) continue;
 
-      for (iNode = 0; iNode < 20; iNode++) {//for3
+      for (iNode = 0; iNode < 20; iNode++) 
         int  nodeID = element->node[iNode];
 
         element_y += mesh->node[nodeID].x[1];
